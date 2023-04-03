@@ -1,5 +1,6 @@
 package com.example.approomdb.fragments.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.view.*
@@ -68,7 +69,24 @@ class UpdateFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete){
+            deleteUser()
+        }
+
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteUser() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Да"){_, _ ->
+        mUserModel.deleteUse(args.curentUser)
+            Toast.makeText(requireContext(), "Запись успешно удалена", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("Нет"){_, _ ->}
+        builder.setTitle("Удалить запись?")
+        builder.setMessage("Точно? ${args.curentUser.firstName}")
+        builder.create().show()
     }
 
 }
