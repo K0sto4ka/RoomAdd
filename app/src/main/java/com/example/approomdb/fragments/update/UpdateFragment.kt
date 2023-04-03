@@ -2,10 +2,8 @@ package com.example.approomdb.fragments.update
 
 import android.os.Bundle
 import android.text.Editable
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -37,7 +35,8 @@ class UpdateFragment : Fragment() {
         bind.UpdatebtnSave.setOnClickListener{
             updateItem()
         }
-
+        //Добавим меню
+        setHasOptionsMenu(true)
 
 
         return bind.root    //inflate(R.layout.fragment_update, container, false)
@@ -63,5 +62,13 @@ class UpdateFragment : Fragment() {
         return firstName.isNotEmpty() && lastName.isNotEmpty() && age.isNotEmpty()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.deletemenu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
 
 }
